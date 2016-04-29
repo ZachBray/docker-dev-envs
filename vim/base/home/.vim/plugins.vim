@@ -17,8 +17,11 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'rking/ag.vim'
 Plugin 'nelstrom/vim-qargs'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'qstrahl/vim-matchmaker'
+Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 
 " LANGUAGE SPECIFIC PLUGINS
 source $HOME/.vim/languageSpecificPlugins.vim

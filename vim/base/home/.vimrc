@@ -30,6 +30,7 @@ set smartindent
 set encoding=utf-8
 set bs=2
 set omnifunc=syntaxcomplete#Complete
+set timeoutlen=1000 ttimeoutlen=0
 
 " CONSTANTS FOR PLUGINS
 let g:agprg="ag --column"
@@ -48,3 +49,4 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 source $HOME/.vim/languageSpecificConfig.vim
+source $HOME/.vim/cursorFix.vim

@@ -46,5 +46,5 @@ Run `vim.mono`
 If you need access to a bash shell in the container, e.g., to install/run a project under the runtime, run the following command replacing `js` as appropriate:
 
 ```
-docker run -it -v $(pwd):/home/dev/src env/vim/js
+docker run -it -v $(pwd):/home/dev/src --entrypoint /bin/bash env/vim/js
 ```

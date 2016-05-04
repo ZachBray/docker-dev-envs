@@ -6,7 +6,7 @@ RUN apt-get update                                                              
     apt-get install -y sudo                                                                              \
                        curl                                                                              \
                        git                                                                               \
-                       vim-nox                                                                           \
+                       vim-nox-py2                                                                       \
                        build-essential                                                                   \
                        cmake                                                                             \
                        python-dev                                                                        \

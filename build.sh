@@ -8,8 +8,7 @@ images=(        \
   vim/base      \
   vim/js        \
   vim/ts        \
-  js/default    \
-  js/webpack    \
+  vim/mono      \
 )
 
 echo $DIVIDER

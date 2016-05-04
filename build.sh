@@ -7,6 +7,7 @@ DIVIDER="======================================="
 images=(        \
   vim/base      \
   vim/js        \
+  vim/ts        \
   js/default    \
   js/webpack    \
 )

@@ -53,3 +53,12 @@ If you need access to a bash shell in the container, e.g., to install/run a proj
 ```
 docker run -it -v $(pwd):/home/dev/src --entrypoint /bin/bash env/vim/js
 ```
+
+## Docker Hints
+
+### Remove stopped containers and dangling images
+
+```
+docker rm $(docker ps -aq)
+docker rmi $(docker images --filter dangling=true --quiet)
+```

@@ -41,6 +41,11 @@ Run `vim.ts`
 Run `vim.mono`
 
 
+### Rust
+
+Run `vim.rust`
+
+
 ### Advanced
 
 If you need access to a bash shell in the container, e.g., to install/run a project under the runtime, run the following command replacing `js` as appropriate:

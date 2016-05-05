@@ -49,7 +49,12 @@ Run `vim.rust`
 
 Run `vim.eclim`
 
-Note: You must create an eclipse project before the plugin works. For example: `:ProjectCreate . -n java`
+Note: You must create an eclipse project before the plugin works. For example: 
+
+```
+:! mvn eclipse:eclipse
+:ProjectImport .
+```
 
 
 ### Advanced

@@ -11,6 +11,9 @@ RUN git clone https://github.com/Shougo/vimproc.vim.git $HOME/.vim/bundle/vimpro
 
 # ADD VIM CONFIGURATION
 ADD home $HOME
+RUN cd $HOME/.vim                                                                   && \
+    echo source $HOME/.vim/tsPlugins.vim | sudo tee -a languageSpecificPlugins.vim  && \
+    echo source $HOME/.vim/tsConfig.vim  | sudo tee -a languageSpecificConfig.vim
 
 # INSTALL VIM PLUGINS
 RUN vim -u $HOME/.vim/plugins.vim +PluginInstall +qall

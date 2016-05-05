@@ -36,7 +36,7 @@ Run `vim.js`
 Run `vim.ts`
 
 
-### Mono
+### Mono (C# / F#)
 
 Run `vim.mono`
 

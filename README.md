@@ -45,6 +45,12 @@ Run `vim.mono`
 
 Run `vim.rust`
 
+### Java/Scala (and other Eclim/Eclipse languages)
+
+Run `vim.eclim`
+
+Note: You must create an eclipse project before the plugin works. For example: `:ProjectCreate . -n java`
+
 
 ### Advanced
 

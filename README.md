@@ -56,6 +56,9 @@ Note: You must create an eclipse project before the plugin works. For example:
 :ProjectImport .
 ```
 
+### Pony
+
+Run `vim.pony`
 
 ### Advanced
 

@@ -11,6 +11,7 @@ images=(        \
   vim/mono      \
   vim/rust      \
   vim/eclim     \
+  vim/pony      \
 )
 
 echo $DIVIDER

@@ -60,6 +60,10 @@ Note: You must create an eclipse project before the plugin works. For example:
 
 Run `vim.pony`
 
+### OCaml
+
+Run `vim.ocaml`
+
 ### Advanced
 
 If you need access to a bash shell in the container, e.g., to install/run a project under the runtime, run the following command replacing `js` as appropriate:

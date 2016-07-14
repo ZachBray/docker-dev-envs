@@ -1,10 +1,10 @@
 FROM env/vim/base
 MAINTAINER zachbray@googlemail.com
 
-
 # INSTALL RUST
-ENV RUST_VERSION=1.8.0
-RUN curl -sf https://static.rust-lang.org/rustup.sh | sudo sh -s -- --revision=$RUST_VERSION
+ENV RUST_VERSION <<RUST_VERSION>>
+RUN echo "version: $RUST_VERSION, rustup args: $RUSTUP_ARGS"
+RUN curl -sf https://static.rust-lang.org/rustup.sh | sudo sh -s -- <<RUSTUP_ARGS>>
 
 # INSTALL RUST SOURCE
 ENV RUST_SRC_HOME=/usr/local/src/rust
@@ -24,11 +24,12 @@ RUN cd /tmp                                                                     
 RUN cd $HOME/.vim/bundle/YouCompleteMe && \
     ./install.py --racer-completer
 
-# INSTALL RUSTFMT
-RUN sudo cargo install rustfmt
+# SET UP CARGO ENV VARS
+ENV CARGO_HOME $HOME/.cargo
+ENV PATH $CARGO_HOME/bin:$PATH
 
-# ADD INSTALLED BINARIES TO PATH
-ENV PATH $HOME/.cargo/bin:$PATH
+# INSTALL RUSTFMT
+RUN cargo install rustfmt
 
 # ADD VIM CONFIGURATION
 ADD home $HOME

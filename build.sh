@@ -4,14 +4,15 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DIVIDER="======================================="
 
 
-images=(        \
-  vim/base      \
-  vim/js        \
-  vim/ts        \
-  vim/mono      \
-  vim/rust      \
-  vim/eclim     \
-  vim/pony      \
+images=(           \
+  vim/base         \
+  vim/js           \
+  vim/ts           \
+  vim/mono         \
+  vim/rust         \
+  vim/rust-nightly \
+  vim/eclim        \
+  vim/pony         \
   vim/ocaml
 )
 
@@ -25,5 +26,9 @@ do
   IMAGE=env/$image
   echo "= Building $IMAGE"
   echo $DIVIDER
-  docker build -t $IMAGE $DIR/$image
+  cd $DIR/$image
+  [ -f "pre-build.sh" ] && ./pre-build.sh
+  docker build -t $IMAGE .
+  [ -f "post-build.sh" ] && ./post-build.sh
+  cd $DIR
 done

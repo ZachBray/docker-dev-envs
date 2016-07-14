@@ -24,9 +24,14 @@ RUN cd /tmp                                                                     
 RUN cd $HOME/.vim/bundle/YouCompleteMe && \
     ./install.py --racer-completer
 
+# INSTALL RUSTFMT
+RUN sudo cargo install rustfmt
+
+# ADD INSTALLED BINARIES TO PATH
+ENV PATH $HOME/.cargo/bin:$PATH
+
 # ADD VIM CONFIGURATION
 ADD home $HOME
 
 # INSTALL VIM PLUGINS
 RUN vim -u $HOME/.vim/plugins.vim +PluginInstall +qall
-

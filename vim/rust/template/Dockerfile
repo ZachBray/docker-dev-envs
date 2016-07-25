@@ -36,3 +36,6 @@ ADD home $HOME
 
 # INSTALL VIM PLUGINS
 RUN vim -u $HOME/.vim/plugins.vim +PluginInstall +qall
+
+# INSTALL CAPNP
+RUN sudo apt-get install -y capnproto

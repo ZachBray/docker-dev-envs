@@ -13,8 +13,8 @@ images=(           \
   vim/rust         \
   vim/rust-nightly \
   vim/eclim        \
-  vim/pony         \
-  vim/ocaml
+  vim/pony         
+#  vim/ocaml
 )
 
 echo $DIVIDER

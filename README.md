@@ -49,10 +49,25 @@ Run `vim.rust`
 
 Run `vim.eclim`
 
-Note: You must create an eclipse project before the plugin works. For example: 
+Please note that you must create an eclipse project before the plugin works. 
+
+#### Maven
 
 ```
 :! mvn eclipse:eclipse
+:ProjectImport .
+```
+
+#### Gradle
+
+In `build.gradle` make sure you have:
+```
+apply plugin: 'eclipse'
+```
+
+Then run:
+```
+:! ./gradlew eclipse
 :ProjectImport .
 ```
 

@@ -71,6 +71,8 @@ Then run:
 :ProjectImport .
 ```
 
+Make sure that the current user owns the `~/.gradle` directory.
+
 ### Pony
 
 Run `vim.pony`

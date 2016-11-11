@@ -16,6 +16,8 @@ nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 map <C-n> :NERDTreeToggle<CR>
 map <C-m> :NERDTreeFind<CR>
+nmap <C-i> <Plug>lnext
+nmap <C-u> <Plug>lprev
 
 " VARIOUS CONFIGURATION
 set number
@@ -31,22 +33,27 @@ set encoding=utf-8
 set bs=2
 set omnifunc=syntaxcomplete#Complete
 set timeoutlen=1000 ttimeoutlen=0
+set grepprg=ag\ --nogroup\ --nocolor
 
 " CONSTANTS FOR PLUGINS
-let g:agprg="ag --column"
-let g:syntastic_enable_signs=0
-let g:syntastic_echo_current_error=0
-let g:syntastic_always_populate_loc_list=0
+let g:ackprg = 'ag --vimgrep'
+let g:syntastic_always_populate_loc_list=1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:matchmaker_enable_startup = 1
-let g:ycm_key_list_select_completion = ['<C-j>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-j>'
-let g:UltiSnipsExpandTrigger = "<C-l>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+let g:ycm_key_list_select_completion = ['<TAB>', '<Nul>', '<C-j>', '<C-l>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<C-k>', '<C-h>', '<Up>']
+let g:BASH_Ctrl_j = 'off'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_caching = 0
+
+" PLUGIN COMMANDS
+highlight SyntasticError guibg=#2f0000
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 source $HOME/.vim/languageSpecificConfig.vim
 source $HOME/.vim/cursorFix.vim

@@ -15,13 +15,14 @@ Plugin 'scrooloose/syntastic'
 Plugin 'bling/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
 Plugin 'nelstrom/vim-qargs'
 Plugin 'qstrahl/vim-matchmaker'
-Plugin 'ervandew/supertab'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'raimondi/delimitmate'
 
 " LANGUAGE SPECIFIC PLUGINS
 source $HOME/.vim/languageSpecificPlugins.vim

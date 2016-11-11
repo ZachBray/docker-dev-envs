@@ -8,12 +8,11 @@ images=(           \
   vim/base         \
   vim/js           \
   vim/ts           \
-  vim/ts2          \
   vim/mono         \
   vim/rust         \
   vim/rust-nightly \
   vim/eclim        \
-  vim/pony         
+  vim/pony         \
   vim/ocaml
 )
 

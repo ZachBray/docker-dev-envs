@@ -2,7 +2,8 @@ FROM env/vim/base
 MAINTAINER zachbray@googlemail.com
 
 # INSTALL OCAML
-RUN sudo apt-get install -y ocaml \
+RUN sudo apt-get update && \
+    sudo apt-get install -y ocaml \
                             ocaml-native-compilers \
 #                           ocaml-doc \
                             ocaml-findlib \

@@ -16,7 +16,7 @@ RUN apt-get update                                                              
 # ADD + SWITCH TO DEV USER
 RUN useradd dev                                                                                       && \
     echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers
-WORKDIR /home/dev 
+WORKDIR /home/dev
 ENV HOME /home/dev
 RUN chown -R dev:dev $HOME/
 USER dev
@@ -42,5 +42,5 @@ VOLUME /home/dev/src
 WORKDIR /home/dev/src
 
 # START VIM
-ENV TERM xterm-256color 
+ENV TERM xterm-256color
 ENTRYPOINT vim

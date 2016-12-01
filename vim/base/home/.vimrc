@@ -16,8 +16,8 @@ nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 map <C-n> :NERDTreeToggle<CR>
 map <C-m> :NERDTreeFind<CR>
-nmap <C-i> :lnext<CR>
-nmap <C-u> :lprev<CR>
+nmap <C-S-l> :lnext<CR>
+nmap <C-S-h> :lprev<CR>
 
 " VARIOUS CONFIGURATION
 set number

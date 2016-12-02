@@ -14,7 +14,7 @@ Run the following commands:
 git clone https://github.com/ZachBray/docker-dev-envs ~/.devenvs
 cd ~/.devenvs
 ./build.sh
-echo source alias.sh >> ~/.bashrc
+echo source ~/.devenvs/utils.sh >> ~/.bashrc
 ```
 
 ## Usage
@@ -23,31 +23,31 @@ Run one of the following commands to run Vim with access to the current director
 
 ### No language specialization
 
-Run `vim.base`
+Run `start_vim base`
 
 
 ### JavaScript/Babel/ES6
 
-Run `vim.js`
+Run `start_vim js`
 
 
 ### TypeScript
 
-Run `vim.ts`
+Run `start_vim ts`
 
 
 ### Mono (C# / F#)
 
-Run `vim.mono`
+Run `start_vim mono`
 
 
 ### Rust
 
-Run `vim.rust`
+Run `start_vim rust`
 
 ### Java/Scala (and other Eclim/Eclipse languages)
 
-Run `vim.eclim`
+Run `start_vim eclim`
 
 Please note that you must create an eclipse project before the plugin works. 
 
@@ -55,6 +55,7 @@ Please note that you must create an eclipse project before the plugin works.
 
 ```
 :! mvn eclipse:eclipse
+:MvnRepo
 :ProjectImport .
 ```
 
@@ -75,11 +76,11 @@ Make sure that the current user owns the `~/.gradle` directory.
 
 ### Pony
 
-Run `vim.pony`
+Run `start_vim pony`
 
 ### OCaml
 
-Run `vim.ocaml`
+Run `start_vim ocaml`
 
 ### Advanced
 

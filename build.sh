@@ -16,6 +16,11 @@ images=(           \
   vim/ocaml
 )
 
+if [ $# -eq 1 ]
+then
+  images=(vim/$1)
+fi
+
 echo $DIVIDER
 echo "= Building ${#images[*]} docker images."
 echo $DIVIDER

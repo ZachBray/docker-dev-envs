@@ -1,36 +1,48 @@
 #!/bin/bash
 
-function start_vim() {
-  if  [ $# -eq 1 ]
-  then
-    echo Starting vim for configuration $1
-    docker run -it -v $(pwd):/home/dev/src \
-                   -v ~/.ssh:/home/dev/.ssh \
-                   -v ~/.gitconfig:/home/dev/.gitconfig \
-                   -v ~/.gradle:/home/dev/.gradle \
-                   -v ~/.cargo:/home/dev/.cargo \
-                   -v ~/.m2:/home/dev/.m2 \
-                   env/vim/$1
-  else
-    echo Must supply one and only one configuration argument: base, js, ts, ts-rc, mono, rust, rust-nightly, eclim, pony or ocaml
-  fi
+function config_volume() {
+  local VOLUME_DIR="~/$1";
+  mkdir -p "$VOLUME_DIR"
+  local VOLUME_ARG="-v $VOLUME_DIR:/home/dev/$1";
+  echo "$VOLUME_ARG";
 }
 
-function start_container() {
-  EXPOSE_ARG=""
-  if [ $# -eq 0 ]
+function docker_vim() {
+  echo "
+Docker VIM
+";
+  if  [ $# -eq 0 ];
   then
-    echo Must supply at least one configuration argument, eg., start_container js
+    echo "
+Usage:
+  docker_vim <environment> <exposed_port>...
+
+Options:
+  environment      One of base, js, ts, rust, rust-nightly, eclim, mono, or pony
+";
   else
-    echo Starting docker for language $1 and exposing port $2
-    docker run -it -v $(pwd):/home/dev/src \
-                   -v ~/.ssh:/home/dev/.ssh \
-                   -v ~/.gitconfig:/home/dev/.gitconfig \
-                   -v ~/.gradle:/home/dev/.gradle \
-                   -v ~/.cargo:/home/dev/.cargo \
-                   -v ~/.m2:/home/dev/.m2 \
-                   --expose $2 -p $2:$2 \
-                   --entrypoint /bin/bash \
-                   env/vim/$1
+    local EXPOSED_PORTS="";
+    local ENTRYPOINT="";
+    for port in ${@:2};
+    do
+      local EXPOSED_PORTS="$EXPOSED_PORTS --expose $port -p $port:$port";
+      local ENTRYPOINT="--entrypoint /bin/bash";
+    done
+    local DOCKER_COMMAND="docker run -it \
+      $EXPOSED_PORTS \
+      $ENTRYPOINT \
+      -v $(pwd):/home/dev/src \
+      $(config_volume .ssh) \
+      $(config_volume .gitconfig) \
+      $(config_volume .gradle) \
+      $(config_volume .m2) \
+      $(config_volume .cargo) \
+      $(config_volume .cache) \
+      $(config_volume .yarn) \
+      env/vim/$1
+    ";
+    echo "Executing:";
+    echo $DOCKER_COMMAND;
+    eval $DOCKER_COMMAND;
   fi
 }

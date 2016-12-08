@@ -1,38 +1,48 @@
 #!/bin/bash
 
-function start_vim() {
-  if [ $# -eq 0 ]
+function config_volume() {
+  local VOLUME_DIR="~/$1";
+  mkdir -p "$VOLUME_DIR"
+  local VOLUME_ARG="-v $VOLUME_DIR:/home/dev/$1";
+  echo "$VOLUME_ARG";
+}
+
+function docker_vim() {
+  echo "
+Docker VIM
+";
+  if  [ $# -eq 0 ];
   then
-    echo ""
-    echo "Must supply at least one configuration argument and optionally ports to expose."
-    echo ""
-    echo "Format:"
-    echo "    start_vim <CONFIG> [<PORT_A> <PORT_B> ...]"
-    echo ""
-    echo "Where:"
-    echo "    CONFIG is a vim container configuration: base, js, ts, ts-rc, mono, rust, rust-nightly, eclim, pony or ocaml."
-    echo ""
-    echo "For example:"
-    echo "    start_vim ts 3000 8080"
-    echo ""
+    echo "
+Usage:
+  docker_vim <environment> <exposed_port>...
+
+Options:
+  environment      One of base, js, ts, rust, rust-nightly, eclim, mono, or pony
+";
   else
-    echo Starting docker for language $1
-    EXPOSE_ARGS=""
-    ENTRYPOINT_ARGS=""
-    for i in ${@:2}
+    local EXPOSED_PORTS="";
+    local ENTRYPOINT="";
+    for port in ${@:2};
     do
-        EXPOSE_ARGS="$EXPOSE_ARGS --expose $i -p $i:$i"
-        ENTRYPOINT_ARGS="--entrypoint /bin/bash"
-        echo Exposing port $i
+      local EXPOSED_PORTS="$EXPOSED_PORTS --expose $port -p $port:$port";
+      local ENTRYPOINT="--entrypoint /bin/bash";
     done
-    docker run -it -v $(pwd):/home/dev/src \
-                   -v ~/.ssh:/home/dev/.ssh \
-                   -v ~/.gitconfig:/home/dev/.gitconfig \
-                   -v ~/.gradle:/home/dev/.gradle \
-                   -v ~/.cargo:/home/dev/.cargo \
-                   -v ~/.m2:/home/dev/.m2 \
-                   $EXPOSE_ARGS \
-                   $ENTRYPOINT_ARGS \
-                   env/vim/$1
+    local DOCKER_COMMAND="docker run -it \
+      $EXPOSED_PORTS \
+      $ENTRYPOINT \
+      -v $(pwd):/home/dev/src \
+      $(config_volume .ssh) \
+      $(config_volume .gitconfig) \
+      $(config_volume .gradle) \
+      $(config_volume .m2) \
+      $(config_volume .cargo) \
+      $(config_volume .cache) \
+      $(config_volume .yarn) \
+      env/vim/$1
+    ";
+    echo "Executing:";
+    echo $DOCKER_COMMAND;
+    eval $DOCKER_COMMAND;
   fi
 }

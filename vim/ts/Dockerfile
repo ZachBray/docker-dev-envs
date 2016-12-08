@@ -2,9 +2,9 @@ FROM env/vim/js
 MAINTAINER zachbray@googlemail.com
 
 # INSTALL GLOBAL NPM PACKAGES
-RUN sudo npm i -g typescript \
-                  tslint     \
-                  typings
+RUN sudo yarn global add typescript \
+                         tslint     \
+                         typings
 
 RUN git clone https://github.com/Shougo/vimproc.vim.git $HOME/.vim/bundle/vimproc.vim  && \
     cd $HOME/.vim/bundle/vimproc.vim                                                   && \

@@ -11,6 +11,7 @@ autocmd FileType java nmap <buffer> <Leader>d :JavaDocSearch -x declarations<cr>
 autocmd FileType java nmap <buffer> <C-]> :JavaSearchContext<cr>
 autocmd FileType java nmap <buffer> <Leader>I :JavaImpl<cr>
 autocmd FileType java nmap <buffer> <Leader>D :JavaDelegate<cr>
+autocmd FileType java nmap <buffer> <Leader>C :JavaCorrect<cr>
 
 autocmd FileType java nmap <buffer> <Leader>e :JavaRename<Space>
 autocmd FileType java nmap <buffer> <Leader>m :JavaMove<Space>

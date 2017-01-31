@@ -1,0 +1,6 @@
+osgi.instance.area.default=@user.home/project
+
+# increase heap size
+-Xmx512M
+
+-XX:-UseCompressedOops

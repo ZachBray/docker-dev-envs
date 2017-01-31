@@ -11,7 +11,7 @@ RUN sudo apt-get update && \
 
 # INSTALL ECLIPSE
 RUN cd $HOME                                                                                                                                        && \
-    curl http://ftp.fau.de/eclipse/technology/epp/downloads/release/neon/R/eclipse-java-neon-R-linux-gtk-x86_64.tar.gz | tar zx --directory $HOME
+    curl http://ftp.fau.de/eclipse/technology/epp/downloads/release/neon/2/eclipse-jee-neon-2-linux-gtk-x86_64.tar.gz | tar zx --directory $HOME
 
 ENV JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 

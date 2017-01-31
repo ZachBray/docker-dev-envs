@@ -1,5 +1,6 @@
 let g:EclimCompletionMethod = 'omnifunc'
 let g:EclimLoggingDisabled = 1
+let g:EclimLogLevel = 'error'
 
 set tabstop=4
 set shiftwidth=4
@@ -20,3 +21,6 @@ autocmd FileType java nmap <buffer> <Leader>n :JavaNew<Space>
 autocmd FileType java vmap <buffer> <Leader>c :JavaConstructor<cr>
 autocmd FileType java vmap <buffer> <Leader>g :JavaGet<cr>
 autocmd FileType java vmap <buffer> <Leader>s :JavaSet<cr>
+
+autocmd FileType scala nmap <buffer> <C-]> :ScalaSearch<cr>
+autocmd FileType scala nmap <buffer> <Leader>i :ScalaImport<cr>:SortScalaImports<cr>

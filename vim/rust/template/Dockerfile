@@ -12,7 +12,7 @@ ENV RUST_SRC_PATH=$RUST_SRC_HOME/src
 RUN cd /tmp                                                                     && \
     curl -sO https://static.rust-lang.org/dist/rustc-$RUST_VERSION-src.tar.gz   && \
     tar -xvzf rustc-$RUST_VERSION-src.tar.gz                                    && \
-    cd rustc-$RUST_VERSION                                                      && \
+    cd rustc-$RUST_VERSION-src                                                  && \
     sudo mkdir -p $RUST_SRC_HOME                                                && \
     sudo mv src $RUST_SRC_HOME                                                  && \
     sudo find $RUST_SRC_HOME -type d -exec chmod a+x {} \;                      && \

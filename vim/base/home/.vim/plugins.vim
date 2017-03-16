@@ -23,6 +23,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'raimondi/delimitmate'
+Plugin 'editorconfig/editorconfig-vim'
 
 " LANGUAGE SPECIFIC PLUGINS
 source $HOME/.vim/languageSpecificPlugins.vim

@@ -28,7 +28,7 @@ Options:
       local EXPOSED_PORTS="$EXPOSED_PORTS --expose $port -p $port:$port";
       local ENTRYPOINT="--entrypoint /bin/bash";
     done
-    local DOCKER_COMMAND="docker run -it \
+    local DOCKER_COMMAND="docker run -it --rm \
       $EXPOSED_PORTS \
       $ENTRYPOINT \
       -v $(pwd):/home/dev/src \

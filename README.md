@@ -45,11 +45,13 @@ Run `start_vim mono`
 
 Run `start_vim rust`
 
+Make sure that the current user owns the `~/.cargo` directory.
+
 ### Java/Scala (and other Eclim/Eclipse languages)
 
 Run `start_vim eclim`
 
-Please note that you must create an eclipse project before the plugin works. 
+Please note that you must create an eclipse project before the plugin works.
 
 #### Maven
 

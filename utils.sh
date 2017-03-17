@@ -1,10 +1,12 @@
 #!/bin/bash
 
 function config_volume() {
-  local VOLUME_DIR="~/$1";
-  mkdir -p "$VOLUME_DIR"
-  local VOLUME_ARG="-v $VOLUME_DIR:/home/dev/$1";
-  echo "$VOLUME_ARG";
+  local VOLUME_DIR="$HOME/$1";
+  if [ -d "$VOLUME_DIR" ] || [ -f "$VOLUME_DIR" ];
+  then
+    local VOLUME_ARG="-v $VOLUME_DIR:/home/dev/$1";
+    echo "$VOLUME_ARG";
+  fi
 }
 
 function docker_vim() {

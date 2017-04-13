@@ -27,7 +27,9 @@ http://download.scala-ide.org/sdk/lithium/e46/scala211/stable/site \
 -installIU \
 org.scala-ide.sdt.feature.feature.group,\
 org.scala-ide.zinc.feature.feature.group,\
-org.scala-ide.scala211.feature.feature.group
+org.scala-ide.scala211.feature.feature.group \
+-uninstallIU \
+org.eclipse.m2e.logback.feature.feature.group
 
 # INSTALL ECLIM
 RUN cd $HOME && \

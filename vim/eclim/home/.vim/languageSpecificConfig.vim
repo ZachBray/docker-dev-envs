@@ -1,6 +1,6 @@
 let g:EclimCompletionMethod = 'omnifunc'
-let g:EclimLoggingDisabled = 1
-let g:EclimLogLevel = 'error'
+" let g:EclimLoggingDisabled = 1
+" let g:EclimLogLevel = 'error'
 
 set tabstop=4
 set shiftwidth=4

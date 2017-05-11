@@ -13,7 +13,9 @@ images=(           \
   vim/rust-nightly \
   vim/eclim        \
   vim/pony         \
-  vim/ocaml
+  vim/ocaml        \
+  vim/puml         \
+  vim/terraform
 )
 
 if [ $# -eq 1 ]

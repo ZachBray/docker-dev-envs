@@ -1,5 +1,6 @@
 " VUNDLE SETUP
 set nocompatible
+set encoding=utf-8
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -24,6 +25,9 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'raimondi/delimitmate'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'godlygeek/tabular'
+Plugin 'cstrahan/vim-capnp'
+
 
 " LANGUAGE SPECIFIC PLUGINS
 source $HOME/.vim/languageSpecificPlugins.vim

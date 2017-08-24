@@ -29,7 +29,6 @@ set shiftwidth=2
 set expandtab
 set autoindent
 set smartindent
-set encoding=utf-8
 set bs=2
 set omnifunc=syntaxcomplete#Complete
 set timeoutlen=1000 ttimeoutlen=0
@@ -47,6 +46,11 @@ let g:ycm_key_list_previous_completion = ['<S-TAB>', '<C-k>', '<C-h>', '<Up>']
 let g:BASH_Ctrl_j = 'off'
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 let g:ctrlp_use_caching = 0
+
+" LANGUAGE CONFIG
+augroup filetypedetect
+au! BufReadPre,BufReadPost,BufRead,BufNewFile *.feature setfiletype cucumber
+augroup END
 
 " PLUGIN COMMANDS
 highlight SyntasticError guibg=#2f0000

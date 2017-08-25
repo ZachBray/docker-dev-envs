@@ -7,4 +7,3 @@ cp -r ../rust/home home
 
 # Fill in templated parameters
 sed -i -e 's/<<RUST_VERSION>>/nightly/g' Dockerfile
-sed -i -e 's/<<RUSTUP_ARGS>>/--channel=nightly/g' Dockerfile

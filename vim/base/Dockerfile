@@ -34,6 +34,9 @@ RUN git clone https://github.com/Valloric/YouCompleteMe.git $HOME/.vim/bundle/Yo
 ADD home $HOME
 RUN sudo chown -R dev:dev $HOME/.vim
 
+# INSTALL CAPNP
+RUN sudo apt-get install -y capnproto
+
 # INSTALL VIM PLUGINS
 RUN vim -u $HOME/.vim/plugins.vim +PluginInstall +qall
 

@@ -3,8 +3,7 @@ MAINTAINER zachbray@googlemail.com
 
 # INSTALL GLOBAL NPM PACKAGES
 RUN sudo yarn global add typescript \
-                         tslint     \
-                         typings
+                         tslint
 
 RUN git clone https://github.com/Shougo/vimproc.vim.git $HOME/.vim/bundle/vimproc.vim  && \
     cd $HOME/.vim/bundle/vimproc.vim                                                   && \

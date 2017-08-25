@@ -13,7 +13,9 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
     sudo apt-get install -y yarn
 
 # INSTALL GLOBAL NPM PACKAGES
-RUN sudo yarn global add eslint babel-eslint
+RUN sudo npm install -g eslint \
+                        babel-eslint \
+                        npm-check-updates
 
 # ADD VIM CONFIGURATION
 ADD home $HOME

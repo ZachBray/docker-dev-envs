@@ -38,7 +38,7 @@ Options:
       $(config_volume .gitconfig) \
       $(config_volume .gradle) \
       $(config_volume .m2) \
-      $(config_volume .cargo) \
+      $(config_volume .cargo/repository) \
       $(config_volume .cache) \
       $(config_volume .yarn) \
       env/vim/$1

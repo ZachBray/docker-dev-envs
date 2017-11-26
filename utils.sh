@@ -1,12 +1,13 @@
 #!/bin/bash
 
 function config_volume() {
-  local VOLUME_DIR="$HOME/$1";
-  if [ -d "$VOLUME_DIR" ] || [ -f "$VOLUME_DIR" ];
+  local VOLUME_DIR="$HOME/.docker_vim/$1";
+  if [ ! -d "$VOLUME_DIR" ] || [ ! -f "$VOLUME_DIR" ];
   then
-    local VOLUME_ARG="-v $VOLUME_DIR:/home/dev/$1";
-    echo "$VOLUME_ARG";
+    mkdir -p $VOLUME_DIR
   fi
+  local VOLUME_ARG="-v $VOLUME_DIR:/home/dev/$1";
+  echo "$VOLUME_ARG";
 }
 
 function docker_vim() {
@@ -38,7 +39,7 @@ Options:
       $(config_volume .gitconfig) \
       $(config_volume .gradle) \
       $(config_volume .m2) \
-      $(config_volume .cargo/repository) \
+      $(config_volume .cargo/registry) \
       $(config_volume .cache) \
       $(config_volume .yarn) \
       env/vim/$1

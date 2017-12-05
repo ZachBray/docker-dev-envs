@@ -16,6 +16,18 @@ ADD plantuml /usr/bin
 RUN sudo apt-get update && \
     sudo apt-get install -y graphviz
 
+# INSTALL FIREFOX FOR VIEWING PDFS
+RUN sudo apt-get update && \
+    sudo apt-get install -y xdg-utils firefox
+
+# INSTALL NODEJS ETC. FOR LIVEDOWN
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -  && \
+    sudo apt-get update && \
+    sudo apt-get install -y nodejs
+
+# INSTALL LIVEDOWN
+RUN sudo npm i -g livedown
+
 # ADD VIM CONFIGURATION
 ADD home $HOME
 

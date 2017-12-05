@@ -15,12 +15,13 @@ images=(           \
   vim/pony         \
   vim/ocaml        \
   vim/puml         \
-  vim/terraform
+  vim/terraform    \
+  tla              \
 )
 
 if [ $# -gt 0 ]
 then
-  images=(vim/$1)
+  images=($1)
 fi
 
 echo $DIVIDER

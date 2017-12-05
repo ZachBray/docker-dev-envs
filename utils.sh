@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function config_volume() {
-  local VOLUME_DIR="$HOME/.docker_vim/$1";
+  local VOLUME_DIR="$HOME/.docker_dev_env/$1";
   if [ ! -d "$VOLUME_DIR" ] || [ ! -f "$VOLUME_DIR" ];
   then
     mkdir -p $VOLUME_DIR
@@ -10,7 +10,7 @@ function config_volume() {
   echo "$VOLUME_ARG";
 }
 
-function docker_vim() {
+function dev_env() {
   echo "
 Docker VIM
 ";
@@ -18,23 +18,31 @@ Docker VIM
   then
     echo "
 Usage:
-  docker_vim <environment> <exposed_port>...
+  dev_env <environment> <exposed_port>...
 
 Options:
   environment      One of base, js, ts, rust, rust-nightly, eclim, mono, or pony
 ";
   else
+    local IMAGE=$1
     local EXPOSED_PORTS="";
     local ENTRYPOINT="";
+    local EXTRA_ARGS="-d"; # Default to running in the background
+    if [[ $IMAGE == *"vim"* ]]; then
+      local EXTRA_ARGS="-it"; # Make it an interactive session for vim
+    fi
     for port in ${@:2};
     do
       local EXPOSED_PORTS="$EXPOSED_PORTS --expose $port -p $port:$port";
       local ENTRYPOINT="--entrypoint /bin/bash";
     done
-    local DOCKER_COMMAND="docker run -it --rm \
+    local DOCKER_COMMAND="docker run --rm \
+      $EXTRA_ARGS \
       $EXPOSED_PORTS \
       $ENTRYPOINT \
       -v $(pwd):/home/dev/src \
+      -v /tmp/.X11-unix:/tmp/.X11-unix \
+      -e DISPLAY=$DISPLAY \
       $(config_volume .ssh) \
       $(config_volume .gitconfig) \
       $(config_volume .gradle) \
@@ -42,9 +50,10 @@ Options:
       $(config_volume .cargo/registry) \
       $(config_volume .cache) \
       $(config_volume .yarn) \
-      env/vim/$1
+      env/$IMAGE
     ";
     echo "Executing:";
+    xhost +
     echo $DOCKER_COMMAND;
     eval $DOCKER_COMMAND;
   fi

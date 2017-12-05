@@ -18,7 +18,7 @@ images=(           \
   vim/terraform
 )
 
-if [ $# -eq 1 ]
+if [ $# -gt 0 ]
 then
   images=(vim/$1)
 fi
@@ -35,7 +35,8 @@ do
   echo $DIVIDER
   cd $DIR/$image
   [ -f "pre-build.sh" ] && ./pre-build.sh
-  docker build -t $IMAGE .
+  echo "docker build $2 -t $IMAGE ."
+  docker build $2 -t $IMAGE .
   [ -f "post-build.sh" ] && ./post-build.sh
   cd $DIR
 done

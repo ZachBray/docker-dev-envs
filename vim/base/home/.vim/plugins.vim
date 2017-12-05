@@ -27,6 +27,7 @@ Plugin 'raimondi/delimitmate'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'godlygeek/tabular'
 Plugin 'cstrahan/vim-capnp'
+Plugin 'mustache/vim-mustache-handlebars'
 
 
 " LANGUAGE SPECIFIC PLUGINS

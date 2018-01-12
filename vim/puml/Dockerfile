@@ -9,7 +9,9 @@ RUN sudo apt-get update && \
                             build-essential
 
 # SET UP PLANT UML
-ENV PLANT_UML_JAR $HOME/.vim/bundle/vim-slumlord/plantuml.jar
+ENV PLANT_UML_JAR $HOME/.plantuml/plantuml.jar
+RUN mkdir -p $HOME/.plantuml
+RUN curl http://sourceforge.mirrorservice.org/p/pl/plantuml/plantuml.jar --output $PLANT_UML_JAR
 ADD plantuml /usr/bin
 
 # INSTALL GRAPHVIZ

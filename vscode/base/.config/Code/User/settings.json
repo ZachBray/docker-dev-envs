@@ -1,0 +1,25 @@
+{
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.ignorecase": false,
+    "vim.incsearch": false,
+    "vim.easymotion": true,
+    "vim.easymotionMarkerHeight": 16,
+    "vim.easymotionMarkerFontWeight": "bold",
+    "vim.easymotionMarkerBackgroundColor": "orange",
+    "vim.easymotionMarkerForegroundColorOneChar": "darkblue",
+    "vim.easymotionMarkerForegroundColorTwoChar": "darkblue",
+    "vim.handleKeys": {
+        "<C-j>": true,
+        "<C-k>": true
+    },
+    "vim.insertModeKeyBindings": [{
+        "before": ["<C-j>"],
+        "after": ["<C-n>"],
+        "commands": []
+    }, {
+        "before": ["<C-k>"],
+        "after": ["<C-p>"],
+        "commands": []
+    }],
+    "extensions.ignoreRecommendations": false
+}

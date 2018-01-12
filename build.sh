@@ -17,6 +17,9 @@ images=(           \
   vim/puml         \
   vim/terraform    \
   tla              \
+  vscode/base      \
+  vscode/dotnet    \
+  vscode/java      \
 )
 
 if [ $# -gt 0 ]

@@ -28,7 +28,7 @@ Options:
     local EXPOSED_PORTS="";
     local ENTRYPOINT="";
     local EXTRA_ARGS="-d"; # Default to running in the background
-    if [[ $IMAGE == *"vim"* ]]; then
+    if [[ $IMAGE == *"vim"* ]] || [[ $IMAGE == *"vscode"* ]]; then
       local EXTRA_ARGS="-it"; # Make it an interactive session for vim
     fi
     for port in ${@:2};
@@ -50,6 +50,8 @@ Options:
       $(config_volume .cargo/registry) \
       $(config_volume .cache) \
       $(config_volume .yarn) \
+      $(config_volume .vscode/extensions/ms-vscode.csharp-1.13.1/.omnisharp) \
+      $(config_volume .vscode/extensions/ms-vscode.csharp-1.13.1/.debugger) \
       env/$IMAGE
     ";
     echo "Executing:";
@@ -58,3 +60,4 @@ Options:
     eval $DOCKER_COMMAND;
   fi
 }
+

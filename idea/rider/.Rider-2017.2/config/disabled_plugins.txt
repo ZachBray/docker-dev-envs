@@ -1,0 +1,3 @@
+com.intellij.database
+com.intellij.resharper.unity
+com.microsoft.vso.idea

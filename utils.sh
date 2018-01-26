@@ -27,9 +27,10 @@ Options:
     local IMAGE=$1
     local EXPOSED_PORTS="";
     local ENTRYPOINT="";
-    local EXTRA_ARGS="-d"; # Default to running in the background
-    if [[ $IMAGE == *"vim"* ]] || [[ $IMAGE == *"vscode"* ]]; then
-      local EXTRA_ARGS="-it"; # Make it an interactive session for vim
+    local EXTRA_ARGS="-it"; # Default to running in the foreground
+    if [[ $IMAGE == *"tla"* ]]
+    then
+      local EXTRA_ARGS="-d"; # Make it an interactive session for vim
     fi
     for port in ${@:2};
     do

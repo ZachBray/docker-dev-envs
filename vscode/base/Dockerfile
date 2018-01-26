@@ -44,6 +44,8 @@ RUN apt-get update && \
     apt-get install -y git
 
 # SET UP WORKSPACE
+RUN apt-get update && \
+    apt-get install -y sudo
 RUN useradd dev && \
     echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers
 ENV HOME /home/dev

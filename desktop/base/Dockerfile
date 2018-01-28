@@ -5,6 +5,7 @@ RUN apt-get update && apt-get install -y \
 	libasound2 \
 	libatk1.0-0 \
 	libcairo2 \
+  libcanberra-gtk-module \
 	libcups2 \
 	libdatrie1 \
 	libdbus-1-3 \
@@ -45,3 +46,11 @@ RUN apt-get update && apt-get install -y \
 # INSTALL GIT
 RUN apt-get update && \
     apt-get install -y git
+
+# SET UP WORKSPACE
+RUN apt-get update && \
+    apt-get install -y sudo
+RUN useradd dev && \
+    echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers
+RUN mkdir -p /home/dev
+RUN chown -R dev:dev /home/dev

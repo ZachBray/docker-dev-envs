@@ -1,5 +1,5 @@
 #!/bin/bash
 
-function rider() {
-  eval bash /Rider-2017.2/bin/rider.sh $1 >> /dev/null &
+function ide() {
+  eval bash /$IDE_VERSION/bin/rider.sh $1 >> /dev/null &
 }

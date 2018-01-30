@@ -20,3 +20,10 @@ noremap <C-S-p> :action GotoSymbol<CR>
 
 " Code editing
 nnoremap <leader>e :action RenameElement<CR>
+
+" Code generation
+nnoremap <leader>gc :action NewClass<CR>
+nnoremap <leader>ge :action NewEnum<CR>
+nnoremap <leader>gi :action NewInterface<CR>
+nnoremap <leader>gf :action NewFile<CR>
+nnoremap <leader>gg :action Generate<CR>

@@ -28,26 +28,25 @@ ENV IDE_CONFIG_HOME /home/dev/.IdeaIC2017.3
 ADD .IdeaIC2017.3 $IDE_CONFIG_HOME
 RUN sudo chown -R dev:dev $IDE_CONFIG_HOME
 
+# ADD PLUGIN INSTALL SCRIPT
+ADD add_plugin.sh /home/dev/add_plugin.sh
+WORKDIR /home/dev
+
 # ADD VIM PLUGIN
 ENV VIM_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=41383
-RUN curl -SL $VIM_PLUGIN_URL --output $HOME/temp.zip
-RUN mkdir -p $IDE_CONFIG_HOME/config/plugins/
-RUN unzip $HOME/temp.zip -d $IDE_CONFIG_HOME/config/plugins/
-RUN rm $HOME/temp.zip
+RUN ./add_plugin.sh $VIM_PLUGIN_URL
 
 # ADD LOMBOK PLUGIN
 ENV LOMBOK_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=38691
-RUN curl -SL $LOMBOK_PLUGIN_URL --output $HOME/temp.zip
-RUN mkdir -p $IDE_CONFIG_HOME/config/plugins/
-RUN unzip $HOME/temp.zip -d $IDE_CONFIG_HOME/config/plugins/
-RUN rm $HOME/temp.zip
+RUN ./add_plugin.sh $LOMBOK_PLUGIN_URL
 
 # ADD CHECKSTYLE PLUGIN
 ENV CHECKSTYLE_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=42639
-RUN curl -SL $CHECKSTYLE_PLUGIN_URL --output $HOME/temp.zip
-RUN mkdir -p $IDE_CONFIG_HOME/config/plugins/
-RUN unzip $HOME/temp.zip -d $IDE_CONFIG_HOME/config/plugins/
-RUN rm $HOME/temp.zip
+RUN ./add_plugin.sh $CHECKSTYLE_PLUGIN_URL
+
+# ADD SAVE ACTIONS PLUGIN
+ENV SAVE_ACTIONS_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=42637
+RUN ./add_plugin.sh $SAVE_ACTIONS_PLUGIN_URL JAR saveActions
 
 # ADD IDEAVIM CONFIGURATION
 ADD .ideavimrc $HOME

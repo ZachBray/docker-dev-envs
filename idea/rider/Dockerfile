@@ -1,6 +1,6 @@
 FROM env/desktop/dotnet
 
-ENV IDE_VERSION Rider-2017.2
+ENV IDE_VERSION Rider-2017.3
 
 # INSTALL RIDER
 RUN wget https://download.jetbrains.com/resharper/JetBrains.$IDE_VERSION.tar.gz
@@ -18,20 +18,23 @@ USER dev
 ENV HOME /home/dev
 
 # ADD SHORTCUTS
+ENV IDE_BIN "/JetBrains $IDE_VERSION/bin/rider.sh"
 ADD shortcuts.sh /home/dev/shortcuts.sh
 RUN sudo chown dev:dev ~/shortcuts.sh
 RUN echo "source /home/dev/shortcuts.sh" >> ~/.bashrc
 
 # ADD CONFIG
-ADD .$IDE_VERSION /home/dev/.$IDE_VERSION
-RUN sudo chown -R dev:dev ~/.$IDE_VERSION
+ENV IDE_CONFIG_HOME /home/dev/.Rider2017.3
+ADD .Rider2017.3 $IDE_CONFIG_HOME
+RUN sudo chown -R dev:dev $IDE_CONFIG_HOME
+
+# ADD PLUGIN INSTALL SCRIPT
+ADD add_plugin.sh /home/dev/add_plugin.sh
+WORKDIR /home/dev
 
 # ADD VIM PLUGIN
 ENV VIM_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=41383
-RUN curl -SL $VIM_PLUGIN_URL --output ~/temp.zip
-RUN mkdir -p ~/.$IDE_VERSION/config/plugins/
-RUN unzip ~/temp.zip -d ~/.$IDE_VERSION/config/plugins/
-RUN rm ~/temp.zip
+RUN ./add_plugin.sh $VIM_PLUGIN_URL
 
 # ADD IDEAVIM CONFIGURATION
 ADD .ideavimrc $HOME

@@ -1,7 +1,12 @@
 #!/bin/bash
 
 function config_volume() {
-  local VOLUME_DIR="$HOME/.docker_dev_env/$1";
+  HOST_ROOT=$2
+  if [[ -z "$HOST_ROOT" ]]
+  then
+    HOST_ROOT=$HOME/.docker_dev_env
+  fi
+  local VOLUME_DIR="$HOST_ROOT/$1";
   if [ ! -d "$VOLUME_DIR" ] || [ ! -f "$VOLUME_DIR" ];
   then
     mkdir -p $VOLUME_DIR
@@ -44,8 +49,9 @@ Options:
       -v $(pwd):/home/dev/src \
       -v /tmp/.X11-unix:/tmp/.X11-unix \
       -e DISPLAY=$DISPLAY \
-      $(config_volume .ssh) \
-      $(config_volume .gitconfig) \
+      --shm-size 2G \
+      $(config_volume .ssh $HOME) \
+      $(config_volume .gitconfig $HOME) \
       $(config_volume .gradle) \
       $(config_volume .m2) \
       $(config_volume .cargo/registry) \

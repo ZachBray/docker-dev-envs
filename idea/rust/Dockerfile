@@ -18,5 +18,5 @@ RUN sudo apt-get update && \
     sudo apt-get install -y gcc
 
 # ADD RUST PLUGIN
-ENV RUST_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=43268
+ENV RUST_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=46640
 RUN bash ~/add_plugin.sh $RUST_PLUGIN_URL

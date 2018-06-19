@@ -1,7 +1,7 @@
 FROM env/desktop/java
 
-ENV IDE_VERSION ideaIC-2017.3.3
-ENV IDE_HOME idea-IC-173.4301.25
+ENV IDE_VERSION ideaIC-2018.1.5
+ENV IDE_HOME idea-IC-181.5281.24
 
 # INSTALL INTELLIJ
 RUN wget -O $IDE_VERSION.tar.gz https://download.jetbrains.com/idea/$IDE_VERSION-no-jdk.tar.gz

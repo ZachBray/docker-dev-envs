@@ -1,7 +1,7 @@
 FROM env/desktop/java
 
-ENV IDE_VERSION ideaIC-2018.1.5
-ENV IDE_HOME idea-IC-181.5281.24
+ENV IDE_VERSION ideaIC-2017.3.3
+ENV IDE_HOME idea-IC-173.4301.25
 
 # INSTALL INTELLIJ
 RUN wget -O $IDE_VERSION.tar.gz https://download.jetbrains.com/idea/$IDE_VERSION-no-jdk.tar.gz
@@ -47,6 +47,10 @@ RUN ./add_plugin.sh $CHECKSTYLE_PLUGIN_URL
 # ADD SAVE ACTIONS PLUGIN
 ENV SAVE_ACTIONS_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=42637
 RUN ./add_plugin.sh $SAVE_ACTIONS_PLUGIN_URL JAR saveActions
+
+# ADD ACE JUMP PLUGIN
+ENV ACE_JUMP_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=44030
+RUN ./add_plugin.sh $ACE_JUMP_PLUGIN_URL
 
 # ADD IDEAVIM CONFIGURATION
 ADD .ideavimrc $HOME

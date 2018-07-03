@@ -7,11 +7,19 @@ RUN wget https://download.jetbrains.com/resharper/JetBrains.$IDE_VERSION.tar.gz
 RUN tar -xzf JetBrains.$IDE_VERSION.tar.gz
 RUN rm JetBrains.$IDE_VERSION.tar.gz
 
+# PREPARE MONO REPOS
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+RUN apt-get install -y apt-transport-https
+RUN echo "deb https://download.mono-project.com/repo/ubuntu stable-xenial main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+
 # INSTALL REQUIRED PACKAGES
 RUN apt-get update && \
     apt-get install -y libsecret-1-0 \
                        gnome-keyring \
-                       unzip
+                       unzip \
+                       mono-complete \
+                       msbuild \
+                       fsharp
 
 # SET USER
 USER dev
@@ -35,6 +43,10 @@ WORKDIR /home/dev
 # ADD VIM PLUGIN
 ENV VIM_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=41383
 RUN ./add_plugin.sh $VIM_PLUGIN_URL
+
+# ADD ACE JUMP PLUGIN
+ENV ACE_JUMP_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=44030
+RUN ./add_plugin.sh $ACE_JUMP_PLUGIN_URL
 
 # ADD IDEAVIM CONFIGURATION
 ADD .ideavimrc $HOME

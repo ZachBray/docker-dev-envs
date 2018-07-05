@@ -1,12 +1,5 @@
 FROM env/desktop/dotnet
 
-ENV IDE_VERSION Rider-2017.3
-
-# INSTALL RIDER
-RUN wget https://download.jetbrains.com/resharper/JetBrains.$IDE_VERSION.tar.gz
-RUN tar -xzf JetBrains.$IDE_VERSION.tar.gz
-RUN rm JetBrains.$IDE_VERSION.tar.gz
-
 # PREPARE MONO REPOS
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
 RUN apt-get install -y apt-transport-https
@@ -21,6 +14,13 @@ RUN apt-get update && \
                        msbuild \
                        fsharp
 
+ENV IDE_VERSION Rider-2018.1
+
+# INSTALL RIDER
+RUN wget https://download.jetbrains.com/resharper/JetBrains.$IDE_VERSION.tar.gz
+RUN tar -xzf JetBrains.$IDE_VERSION.tar.gz
+RUN rm JetBrains.$IDE_VERSION.tar.gz
+
 # SET USER
 USER dev
 ENV HOME /home/dev
@@ -32,7 +32,7 @@ RUN sudo chown dev:dev ~/shortcuts.sh
 RUN echo "source /home/dev/shortcuts.sh" >> ~/.bashrc
 
 # ADD CONFIG
-ENV IDE_CONFIG_HOME /home/dev/.Rider2017.3
+ENV IDE_CONFIG_HOME /home/dev/.Rider2018.1
 ADD .Rider2017.3 $IDE_CONFIG_HOME
 RUN sudo chown -R dev:dev $IDE_CONFIG_HOME
 

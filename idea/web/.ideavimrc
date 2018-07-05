@@ -1,0 +1,29 @@
+" Set leader key
+let mapleader='\'
+let maplocalleader = '\'
+
+" Auto-completion keymaps
+nnoremap <leader>i :action ShowIntentionActions<CR>
+
+" Navigation
+nnoremap <leader>h :action Back<CR>
+nnoremap <leader>l :action Forward<CR>
+nnoremap <leader>j :action GotoNextError<CR>
+nnoremap <leader>k :action GotoPreviousError<CR>
+nnoremap <leader><leader>j :action MethodDown<CR>
+nnoremap <leader><leader>k :action MethodUp<CR>
+nnoremap <C-[> :action ShowUsages<CR>
+nnoremap <leader>n :action NextOccurence<CR>
+nnoremap <leader>p :action PreviousOccurence<CR>
+noremap <C-p> :action GotoFile<CR>
+noremap <C-S-p> :action GotoSymbol<CR>
+
+" Code editing
+nnoremap <leader>e :action RenameElement<CR>
+
+" Code generation
+nnoremap <leader>gc :action NewClass<CR>
+nnoremap <leader>ge :action NewEnum<CR>
+nnoremap <leader>gi :action NewInterface<CR>
+nnoremap <leader>gf :action NewFile<CR>
+nnoremap <leader>gg :action Generate<CR>

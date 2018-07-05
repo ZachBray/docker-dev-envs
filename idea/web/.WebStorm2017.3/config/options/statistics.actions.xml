@@ -1,0 +1,24 @@
+<application>
+  <component name="ActionsCollector">
+    <counts>
+      <entry action="$Undo" count="3" />
+      <entry action="Create Interface  IChannelSubscriber " count="1" />
+      <entry action="EditorBackSpace" count="22" />
+      <entry action="EditorChooseLookupItem" count="21" />
+      <entry action="EditorDown" count="6" />
+      <entry action="EditorNextWord" count="2" />
+      <entry action="EditorTab" count="2" />
+      <entry action="EditorUp" count="3" />
+      <entry action="Fix TSLint Problems" count="1" />
+      <entry action="GotoAction" count="2" />
+      <entry action="GotoFile" count="1" />
+      <entry action="InsertLiveTemplate" count="4" />
+      <entry action="Move" count="3" />
+      <entry action="NewDir" count="1" />
+      <entry action="NewFile" count="4" />
+      <entry action="RenameElement" count="3" />
+      <entry action="ShowSettings" count="1" />
+      <entry action="TSLint_ Fix current error" count="1" />
+    </counts>
+  </component>
+</application>

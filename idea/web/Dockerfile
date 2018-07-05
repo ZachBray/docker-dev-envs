@@ -26,8 +26,8 @@ RUN echo "source /home/dev/shortcuts.sh" >> ~/.bashrc
 
 # ADD CONFIG
 ENV IDE_CONFIG_HOME /home/dev/.WebStorm2017.3
-# ADD .Rider2017.3 $IDE_CONFIG_HOME
-# RUN sudo chown -R dev:dev $IDE_CONFIG_HOME
+ADD .WebStorm2017.3 $IDE_CONFIG_HOME
+RUN sudo chown -R dev:dev $IDE_CONFIG_HOME
 
 # ADD PLUGIN INSTALL SCRIPT
 ADD add_plugin.sh /home/dev/add_plugin.sh

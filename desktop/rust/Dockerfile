@@ -1,13 +1,15 @@
 FROM env/desktop/base
 
+# SET USER
+USER dev
+ENV HOME /home/dev
+
 # INSTALL GCC FOR LINKING
 RUN sudo apt-get update && \
     sudo apt-get install -y gcc
 
 # INSTALL RUST
-ENV RUST_VERSION nightly
-RUN echo "version: $RUST_VERSION"
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain $RUST_VERSION -y
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 # SET UP CARGO ENV VARS
 ENV CARGO_HOME $HOME/.cargo

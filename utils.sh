@@ -54,6 +54,7 @@ Options:
       $(config_volume .gitconfig $HOME) \
       $(config_volume .gradle) \
       $(config_volume .m2) \
+      $(config_volume .java) \
       $(config_volume .cargo/registry) \
       $(config_volume .cache) \
       $(config_volume .yarn) \

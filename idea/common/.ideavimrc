@@ -18,9 +18,10 @@ nnoremap <leader>m :action FileStructurePopup<CR>
 nnoremap <C-[> :action ShowUsages<CR>
 nnoremap <C-S-[> :action FindUsages<CR>
 nnoremap <C-S-]> :action GotoImplementation<CR>
-noremap <C-p> :action GotoFile<CR>
-noremap <C-S-p> :action GotoSymbol<CR>
-noremap <C-A-p> :action RecentFiles<CR>
+" These are broken in 2018.* because of keyboard focus
+" noremap <C-p> :action GotoFile<CR>
+" noremap <C-S-p> :action GotoSymbol<CR>
+" noremap <C-A-p> :action RecentFiles<CR>
 nnoremap ]h :action VcsShowPrevChangeMarker<CR>
 nnoremap [h :action VcsShowNextChangeMarker<CR>
 nnoremap <leader><leader>f :action AceAction<CR>

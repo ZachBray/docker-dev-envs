@@ -14,10 +14,10 @@ RUN apt-get update && \
                        msbuild \
                        fsharp
 
-ENV IDE_VERSION Rider-2018.1
+ENV IDE_VERSION Rider-2018.2
 
 # INSTALL RIDER
-RUN wget https://download.jetbrains.com/resharper/JetBrains.$IDE_VERSION.tar.gz
+RUN wget https://download.jetbrains.com/rider/JetBrains.$IDE_VERSION.tar.gz
 RUN tar -xzf JetBrains.$IDE_VERSION.tar.gz
 RUN rm JetBrains.$IDE_VERSION.tar.gz
 

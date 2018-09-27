@@ -45,8 +45,8 @@ ENV CHECKSTYLE_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true
 RUN ./add_plugin.sh $CHECKSTYLE_PLUGIN_URL
 
 # ADD SONAR LINT PLUGIN
-ENV SONAR_LINT_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=48286
-RUN ./add_plugin.sh $SONAR_LINT_PLUGIN_URL
+# ENV SONAR_LINT_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=48286
+# RUN ./add_plugin.sh $SONAR_LINT_PLUGIN_URL
 
 # ADD SAVE ACTIONS PLUGIN
 ENV SAVE_ACTIONS_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=48395
@@ -57,8 +57,8 @@ ENV ACE_JUMP_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&u
 RUN ./add_plugin.sh $ACE_JUMP_PLUGIN_URL
 
 # ADD CUCUMBER PLUGIN
-ENV CUCUMBER_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=48206
-RUN ./add_plugin.sh $CUCUMBER_PLUGIN_URL
+# ENV CUCUMBER_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=48206
+# RUN ./add_plugin.sh $CUCUMBER_PLUGIN_URL
 
 # ADD EDITOR CONFIG
 ENV EDITOR_CONFIG_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=46642
@@ -75,5 +75,12 @@ RUN sudo chown dev:dev $HOME/.ideavimrc
 # ADD MOUNT POINT
 VOLUME /home/dev/src
 WORKDIR /home/dev/src
+
+# FIX INTELLIJ VM OPTIONS TO GIVE MORE MEMORY
+ENV IDE_VM_OPTIONS=/$IDE_HOME/bin/idea64.vmoptions
+RUN sudo sed -i 1,3d $IDE_VM_OPTIONS
+RUN echo "-Xms2048m" | sudo tee -a $IDE_VM_OPTIONS
+RUN echo "-Xmx4096m" | sudo tee -a $IDE_VM_OPTIONS
+RUN echo "-XX:ReservedCodeCacheSize=1024m" | sudo tee -a $IDE_VM_OPTIONS
 
 ENTRYPOINT /bin/bash

@@ -54,4 +54,11 @@ RUN sudo chown dev:dev $HOME/.ideavimrc
 VOLUME /home/dev/src
 WORKDIR /home/dev/src
 
+# FIX INTELLIJ VM OPTIONS TO GIVE MORE MEMORY
+ENV IDE_VM_OPTIONS=$IDE_HOME/$IDE_BUILD/bin/idea64.vmoptions
+RUN sed -i 1,3d $IDE_VM_OPTIONS
+RUN echo "-Xms2048m" >> $IDE_VM_OPTIONS
+RUN echo "-Xmx4096m" >> $IDE_VM_OPTIONS
+RUN echo "-XX:ReservedCodeCacheSize=1024m" >> $IDE_VM_OPTIONS
+
 ENTRYPOINT /bin/bash

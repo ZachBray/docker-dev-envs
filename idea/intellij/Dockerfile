@@ -1,6 +1,6 @@
 FROM env/desktop/java
 
-ENV IDE_VERSION ideaIC-2018.2.1
+ENV IDE_VERSION ideaIC-2018.2.5
 
 # INSTALL INTELLIJ
 RUN wget -O $IDE_VERSION.tar.gz https://download.jetbrains.com/idea/$IDE_VERSION-no-jdk.tar.gz
@@ -18,7 +18,7 @@ USER dev
 ENV HOME /home/dev
 
 # ADD SHORTCUTS
-ENV IDE_HOME idea-IC-182.3911.36
+ENV IDE_HOME idea-IC-182.4892.20
 ADD shortcuts.sh /home/dev/shortcuts.sh
 RUN sudo chown dev:dev ~/shortcuts.sh
 RUN echo "source /home/dev/shortcuts.sh" >> ~/.bashrc
@@ -68,6 +68,10 @@ RUN ./add_plugin.sh $EDITOR_CONFIG_PLUGIN_URL
 ENV KEY_PROMOTER_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=47761
 RUN ./add_plugin.sh $KEY_PROMOTER_PLUGIN_URL
 
+# ADD KOTLIN PLUGIN
+ENV KOTLIN_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=51536
+RUN ./add_plugin.sh $KOTLIN_PLUGIN_URL
+
 # ADD IDEAVIM CONFIGURATION
 ADD .ideavimrc $HOME
 RUN sudo chown dev:dev $HOME/.ideavimrc
@@ -82,5 +86,15 @@ RUN sudo sed -i 1,3d $IDE_VM_OPTIONS
 RUN echo "-Xms2048m" | sudo tee -a $IDE_VM_OPTIONS
 RUN echo "-Xmx4096m" | sudo tee -a $IDE_VM_OPTIONS
 RUN echo "-XX:ReservedCodeCacheSize=1024m" | sudo tee -a $IDE_VM_OPTIONS
+
+# ADD DOTNET FOR X-PLATFORM BUILDS
+RUN sudo apt-key adv --keyserver packages.microsoft.com --recv-keys EB3E94ADBE1229CF
+RUN sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
+RUN sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-bionic-prod bionic main" > /etc/apt/sources.list.d/dotnetdev.list'
+RUN sudo apt-get update
+RUN sudo apt-get install apt-transport-https
+RUN sudo apt-get update
+RUN sudo apt install -y dotnet-sdk-2.1
+
 
 ENTRYPOINT /bin/bash

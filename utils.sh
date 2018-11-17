@@ -48,6 +48,7 @@ Options:
       $ENTRYPOINT \
       -v $(pwd):/home/dev/src \
       -v /tmp/.X11-unix:/tmp/.X11-unix \
+      -v /var/run/docker.sock:/var/run/docker.sock \
       -e DISPLAY=$DISPLAY \
       --shm-size 2G \
       $(config_volume .ssh $HOME) \

@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
 # INSTALL LIBRARIES FOR XWINDOWS
 RUN apt-get update && apt-get install -y \

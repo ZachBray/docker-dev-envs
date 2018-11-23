@@ -54,3 +54,25 @@ RUN useradd dev && \
     echo "ALL            ALL = (ALL) NOPASSWD: ALL" >> /etc/sudoers
 RUN mkdir -p /home/dev
 RUN chown -R dev:dev /home/dev
+
+# SET LOCALE
+RUN sed -i -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen && \
+    locale-gen
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US:en
+ENV LC_ALL en_US.UTF-8
+
+# INSTALL AND CONFIGURE ZSH
+RUN apt-get update && \
+    apt-get install -y zsh \
+                       powerline \
+                       fonts-powerline \
+                       zsh-theme-powerlevel9k \
+                       zsh-syntax-highlighting
+RUN usermod -s /usr/bin/zsh dev
+ADD .zshrc /home/dev/.zshrc
+
+# INSTALL TMUX
+RUN apt update && \
+    apt install -y tmux
+ADD .tmux.conf /home/dev/.tmux.conf

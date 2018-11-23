@@ -53,8 +53,8 @@ ENV SAVE_ACTIONS_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=tr
 RUN ./add_plugin.sh $SAVE_ACTIONS_PLUGIN_URL JAR saveActions
 
 # ADD ACE JUMP PLUGIN
-ENV ACE_JUMP_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=44030
-RUN ./add_plugin.sh $ACE_JUMP_PLUGIN_URL
+# ENV ACE_JUMP_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=44030
+# RUN ./add_plugin.sh $ACE_JUMP_PLUGIN_URL
 
 # ADD CUCUMBER PLUGIN
 # ENV CUCUMBER_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=48206
@@ -97,4 +97,4 @@ RUN sudo apt-get update
 RUN sudo apt install -y dotnet-sdk-2.1
 
 
-ENTRYPOINT /bin/bash
+ENTRYPOINT tmux

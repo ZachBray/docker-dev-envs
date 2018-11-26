@@ -76,3 +76,7 @@ ADD .zshrc /home/dev/.zshrc
 RUN apt update && \
     apt install -y tmux
 ADD .tmux.conf /home/dev/.tmux.conf
+
+# INSTALL VIM
+RUN apt update && \
+    apt install -y vim

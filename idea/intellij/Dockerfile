@@ -1,6 +1,6 @@
 FROM env/desktop/java
 
-ENV IDE_VERSION ideaIC-2018.2.5
+ENV IDE_VERSION ideaIC-2018.3.2
 
 # INSTALL INTELLIJ
 RUN wget -O $IDE_VERSION.tar.gz https://download.jetbrains.com/idea/$IDE_VERSION-no-jdk.tar.gz
@@ -18,10 +18,12 @@ USER dev
 ENV HOME /home/dev
 
 # ADD SHORTCUTS
-ENV IDE_HOME idea-IC-182.4892.20
+ENV IDE_HOME idea-IC-183.4886.37
 ADD shortcuts.sh /home/dev/shortcuts.sh
 RUN sudo chown dev:dev ~/shortcuts.sh
+RUN sudo chown dev:dev ~/.zshrc
 RUN echo "source /home/dev/shortcuts.sh" >> ~/.bashrc
+RUN echo "source /home/dev/shortcuts.sh" >> ~/.zshrc
 
 # ADD CONFIG
 ENV IDE_CONFIG_HOME /home/dev/.IdeaIC2017.3

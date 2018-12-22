@@ -74,6 +74,11 @@ RUN ./add_plugin.sh $KEY_PROMOTER_PLUGIN_URL
 ENV KOTLIN_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=51536
 RUN ./add_plugin.sh $KOTLIN_PLUGIN_URL
 
+# ADD PLANTUML PLUGIN
+RUN sudo apt update && sudo apt install -y graphviz
+ENV PLANT_UML_PLUGIN_URL https://plugins.jetbrains.com/plugin/download?rel=true&updateId=50970
+RUN ./add_plugin.sh $PLANT_UML_PLUGIN_URL
+
 # ADD IDEAVIM CONFIGURATION
 ADD .ideavimrc $HOME
 RUN sudo chown dev:dev $HOME/.ideavimrc

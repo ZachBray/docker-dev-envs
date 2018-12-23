@@ -24,7 +24,7 @@ nnoremap <C-S-]> :action GotoImplementation<CR>
 " noremap <C-A-p> :action RecentFiles<CR>
 nnoremap ]h :action VcsShowPrevChangeMarker<CR>
 nnoremap [h :action VcsShowNextChangeMarker<CR>
-nnoremap <leader><leader>f :action AceAction<CR>
+" nnoremap <leader><leader>f :action AceAction<CR>
 
 " Code editing
 nnoremap <leader>e :action RenameElement<CR>

@@ -1,7 +1,0 @@
-CVS
-DevKit
-Subversion
-com.intellij.uiDesigner
-hg4idea
-org.jetbrains.android
-org.jetbrains.plugins.github

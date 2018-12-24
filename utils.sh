@@ -60,6 +60,9 @@ Options:
       $(config_volume .cargo/registry) \
       $(config_volume .cache) \
       $(config_volume .yarn) \
+      $(config_volume .IdeaIC2018.3) \
+      $(config_volume .Rider2018.3) \
+      $(config_volume .WebStorm2018.3) \
       $(config_volume .vscode/extensions/ms-vscode.csharp-1.13.1/.omnisharp) \
       $(config_volume .vscode/extensions/ms-vscode.csharp-1.13.1/.debugger) \
       env/$IMAGE

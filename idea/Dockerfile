@@ -85,6 +85,13 @@ RUN sudo ./add_plugin.sh $INTELLIJ_HOME 51536
 # rust
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 48624
 
+# CONFIGURATION
+# =============
+ADD fix_keymap.sh /home/dev/fix_keymap.sh
+ADD \$default.xml /home/dev/\$default.xml
+RUN sudo ./fix_keymap.sh $RIDER_HOME
+RUN sudo ./fix_keymap.sh $INTELLIJ_HOME
+RUN sudo ./fix_keymap.sh $WEBSTORM_HOME
 
 # SHORTCUTS
 # =========

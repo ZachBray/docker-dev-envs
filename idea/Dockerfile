@@ -83,7 +83,7 @@ RUN sudo ./add_plugin.sh $INTELLIJ_HOME 48315
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 51536
 
 # rust
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 48624
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 53557
 
 # CONFIGURATION
 # =============

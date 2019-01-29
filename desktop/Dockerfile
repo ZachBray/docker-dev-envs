@@ -137,15 +137,22 @@ RUN sudo yarn global add typescript \
 # ====
 
 # install JDK
-RUN sudo apt update && \
-    sudo apt install -y openjdk-8-jdk
+# RUN sudo apt update && \
+#     sudo apt install -y openjdk-8-jdk
+
+# change shell so we can source sdkman in future steps
+SHELL ["/bin/bash", "-c"]
 
 # install SDKMAN, Maven and Kotlin
 RUN sudo apt update && \
     sudo apt install -y zip unzip curl
-ENV SDKMAN_DIR=/usr/local/sdkman
-RUN curl -s "https://get.sdkman.io" | sudo bash -
-RUN sudo bash -c 'source "/home/dev/.sdkman/bin/sdkman-init.sh" && sdk install maven && sdk install kotlin && sdk install kscript'
+RUN curl -s "https://get.sdkman.io" | bash
+ENV BASH_ENV /home/dev/.sdkman/bin/sdkman-init.sh
+RUN sdk install java 8.0.202-amzn
+RUN sdk install java 11.0.2-open
+RUN sdk install maven
+RUN sdk install kotlin
+RUN sdk install kscript
 
 
 # SHELL
@@ -159,8 +166,11 @@ RUN sudo apt update && \
                         zsh-theme-powerlevel9k \
                         zsh-syntax-highlighting
 RUN sudo usermod -s /usr/bin/zsh dev
+RUN mv /home/dev/.zshrc /home/dev/.zshrc.old
 ADD .zshrc /home/dev/.zshrc
 RUN sudo chown dev:dev ~/.zshrc
+RUN cat /home/dev/.zshrc.old >> /home/dev/.zshrc
+RUN rm /home/dev/.zshrc.old
 
 # install tmux
 RUN sudo apt update && \

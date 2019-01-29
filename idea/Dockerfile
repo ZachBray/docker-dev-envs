@@ -35,7 +35,7 @@ RUN sudo bash fix_vm_options.sh $RIDER_HOME/bin/rider64.vmoptions
 
 ENV INTELLIJ_VERSION ideaIC-2018.3.2
 ENV INTELLIJ_HOME /idea-IC-183.4886.37
-RUN wget -O intellij.tar.gz https://download.jetbrains.com/idea/$INTELLIJ_VERSION-no-jdk.tar.gz
+RUN wget -O intellij.tar.gz https://download.jetbrains.com/idea/$INTELLIJ_VERSION.tar.gz
 RUN sudo tar -C / -xzf intellij.tar.gz
 RUN rm intellij.tar.gz
 RUN sudo bash fix_vm_options.sh $INTELLIJ_HOME/bin/idea64.vmoptions
@@ -89,9 +89,9 @@ RUN sudo ./add_plugin.sh $INTELLIJ_HOME 53557
 # =============
 ADD fix_keymap.sh /home/dev/fix_keymap.sh
 ADD \$default.xml /home/dev/\$default.xml
-RUN sudo ./fix_keymap.sh $RIDER_HOME
-RUN sudo ./fix_keymap.sh $INTELLIJ_HOME
-RUN sudo ./fix_keymap.sh $WEBSTORM_HOME
+RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $RIDER_HOME"
+RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $INTELLIJ_HOME"
+RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $WEBSTORM_HOME"
 
 # SHORTCUTS
 # =========

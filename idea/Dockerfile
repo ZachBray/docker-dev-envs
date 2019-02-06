@@ -93,6 +93,10 @@ RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $RIDER_HOME"
 RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $INTELLIJ_HOME"
 RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $WEBSTORM_HOME"
 
+# JAVA VISIBILITY
+# ===============
+RUN sudo ln -s /home/dev/.sdkman/candidates/java /usr/lib/jvm
+
 # SHORTCUTS
 # =========
 ADD shortcuts.sh /home/dev/shortcuts.sh

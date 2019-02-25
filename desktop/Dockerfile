@@ -137,8 +137,11 @@ RUN sudo yarn global add typescript \
 # ====
 
 # install JDK
-# RUN sudo apt update && \
-#     sudo apt install -y openjdk-8-jdk
+RUN sudo apt update && \
+    sudo apt install -y openjdk-8-jdk \
+                        openjdk-8-dbg \
+                        openjdk-11-jdk \
+                        openjdk-11-dbg
 
 # change shell so we can source sdkman in future steps
 SHELL ["/bin/bash", "-c"]
@@ -148,12 +151,16 @@ RUN sudo apt update && \
     sudo apt install -y zip unzip curl
 RUN curl -s "https://get.sdkman.io" | bash
 ENV BASH_ENV /home/dev/.sdkman/bin/sdkman-init.sh
-RUN sdk install java 8.0.202-amzn
-RUN sdk install java 11.0.2-open
 RUN sdk install maven
 RUN sdk install kotlin
 RUN sdk install kscript
 
+# install async-profiler
+RUN wget https://github.com/jvm-profiling-tools/async-profiler/releases/download/v1.5/async-profiler-1.5-linux-x64.tar.gz -O /tmp/async-profiler.tar.gz
+RUN sudo mkdir -p /tools
+RUN sudo chown dev /tools
+RUN tar -xvzf /tmp/async-profiler.tar.gz -C /tools
+RUN rm /tmp/async-profiler.tar.gz
 
 # SHELL
 # =====

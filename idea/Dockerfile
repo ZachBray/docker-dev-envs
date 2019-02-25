@@ -95,7 +95,10 @@ RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $WEBSTORM_HOME"
 
 # JAVA VISIBILITY
 # ===============
-RUN sudo ln -s /home/dev/.sdkman/candidates/java /usr/lib/jvm
+# symbolic links aren't working in intellij...
+# RUN sudo ln -s /home/dev/.sdkman/candidates/java /usr/lib/jvm
+RUN sudo mkdir -p /usr/lib/jvm
+RUN sudo cp -R /home/dev/.sdkman/candidates/java/* /usr/lib/jvm
 
 # SHORTCUTS
 # =========

@@ -50,7 +50,8 @@ Options:
       -v /tmp/.X11-unix:/tmp/.X11-unix \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -e DISPLAY=$DISPLAY \
-      --cap-add=SYS_ADMIN \
+      --cap-add=sys_admin \
+      --security-opt seccomp=unconfined \
       --shm-size 2G \
       $(config_volume .ssh $HOME) \
       $(config_volume .gitconfig $HOME) \

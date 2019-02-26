@@ -87,17 +87,33 @@ ENV PATH $CARGO_HOME/bin:$PATH
 RUN rustup component add rust-src
 ENV RUST_SRC_PATH $HOME/.rustup/toolchains/$RUST_VERSION-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
 
-
 # DOTNET
 # ======
+RUN sudo apt update && \
+    sudo apt install -y apt-transport-https \
+                        software-properties-common 
 
 RUN sudo apt update && \
-    sudo apt install -y apt-transport-https
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
-RUN sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
-RUN sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-bionic-prod bionic main" > /etc/apt/sources.list.d/dotnetdev.list'
-RUN sudo apt update && \
-    sudo apt install -y dotnet-sdk-2.2
+    sudo apt install -y --no-install-recommends \
+        libc6 \
+        libgcc1 \
+        libgssapi-krb5-2 \
+        libicu60 \
+        liblttng-ust0 \
+        libssl1.0.0 \
+        libstdc++6 \
+        zlib1g
+ENV DOTNET_SDK_VERSION 2.2.104
+RUN curl -SL --output dotnet.tar.gz https://dotnetcli.blob.core.windows.net/dotnet/Sdk/$DOTNET_SDK_VERSION/dotnet-sdk-$DOTNET_SDK_VERSION-linux-x64.tar.gz \
+    && dotnet_sha512='fd03cc4abea849ee5e05a035e2888c71d8842e64389dd94d7301e0fcfc189cbed99fe84a6174b657ffe3d328faa761972c061a339246f63c9ba8fa31ead2a1b0' \
+    && echo "$dotnet_sha512 dotnet.tar.gz" | sha512sum -c - \
+    && sudo mkdir -p /usr/share/dotnet \
+    && sudo tar -zxf dotnet.tar.gz -C /usr/share/dotnet \
+    && rm dotnet.tar.gz \
+    && sudo ln -s /usr/share/dotnet/dotnet /usr/bin/dotnet
+
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
 
 # MONO + FSHARP
 # =============
@@ -135,6 +151,9 @@ RUN sudo yarn global add typescript \
 
 # JAVA
 # ====
+
+# use repository that holds JDK 11
+RUN sudo add-apt-repository ppa:openjdk-r/ppa
 
 # install JDK
 RUN sudo apt update && \

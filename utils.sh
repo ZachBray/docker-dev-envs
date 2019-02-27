@@ -51,6 +51,11 @@ Options:
       -v /var/run/docker.sock:/var/run/docker.sock \
       -e DISPLAY=$DISPLAY \
       --cap-add=sys_admin \
+      --cap-add=sys_ptrace \
+      --cap-add=net_raw \
+      --cap-add=net_admin \
+      --cap-add=setgid \
+      --cap-add=setuid \
       --security-opt seccomp=unconfined \
       --shm-size 2G \
       $(config_volume .ssh $HOME) \

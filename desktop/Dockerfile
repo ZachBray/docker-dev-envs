@@ -208,6 +208,15 @@ RUN sudo chown dev:dev ~/.tmux.conf
 RUN sudo apt update && \
     sudo apt install -y vim
 
+# WIRESHARK
+# =========
+RUN sudo apt update && \
+    sudo DEBIAN_FRONTEND=noninteractive apt-get install -y wireshark
+RUN sudo groupadd wireshark
+RUN sudo usermod -a -G wireshark dev
+RUN sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure wireshark-common
+RUN sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
+RUN sudo chmod +x /usr/bin/dumpcap
 
 # TOOLS
 # =====

@@ -227,6 +227,11 @@ RUN sudo apt update && sudo apt install -y net-tools
 RUN sudo apt update && sudo apt install -y lsof
 RUN sudo apt update && sudo apt install -y strace
 RUN sudo apt update && sudo apt install -y linux-tools-`uname -r` linux-tools-generic
+RUN sudo apt update && sudo apt install -y jq
+RUN sudo apt update && sudo DEBIAN_FRONTEND=noninteractive apt install -y awscli
+RUN sudo apt update && sudo apt install -y docker docker-compose
+RUN sudo groupmod -g 999 docker
+RUN sudo usermod -a -G docker dev
 
 # ENTRYPOINT
 # ==========

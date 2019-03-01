@@ -233,6 +233,13 @@ RUN sudo apt update && sudo apt install -y docker docker-compose
 RUN sudo groupmod -g 999 docker
 RUN sudo usermod -a -G docker dev
 
+# TERRAFORM
+# =========
+
+ENV TERRAFORM_VERSION=0.11.11
+RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O /tmp/terraform.zip
+RUN sudo unzip /tmp/terraform.zip -d /usr/local/bin
+
 # ENTRYPOINT
 # ==========
 

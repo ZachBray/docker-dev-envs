@@ -60,6 +60,7 @@ Options:
       --shm-size 2G \
       $(config_volume .ssh $HOME) \
       $(config_volume .gitconfig $HOME) \
+      $(config_volume .aws $HOME) \
       $(config_volume .gradle) \
       $(config_volume .m2) \
       $(config_volume .java) \

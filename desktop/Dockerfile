@@ -240,6 +240,29 @@ ENV TERRAFORM_VERSION=0.11.11
 RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O /tmp/terraform.zip
 RUN sudo unzip /tmp/terraform.zip -d /usr/local/bin
 
+# BTRACE
+# ======
+ENV BTRACE_VERSION=1.3.11.3
+ENV BTRACE_HOME=/usr/lib/btrace/btrace-$BTRACE_VERSION
+RUN wget https://github.com/btraceio/btrace/releases/download/v$BTRACE_VERSION/btrace-bin-$BTRACE_VERSION.tgz -O /tmp/btrace.tar.gz
+RUN sudo mkdir -p $BTRACE_HOME
+RUN sudo tar -C $BTRACE_HOME -xf /tmp/btrace.tar.gz
+ENV PATH=$BTRACE_HOME/bin:$PATH
+
+# JENV
+# ====
+ENV JENV_HOME=$HOME/.jenv
+RUN git clone https://github.com/jenv/jenv.git $JENV_HOME
+ENV PATH=$JENV_HOME/bin:$PATH
+RUN echo 'eval "$(jenv init -)"' >> ~/.zshrc
+RUN echo 'eval "$(jenv init -)"' >> ~/.bash_profile
+RUN eval "$(jenv init -)" && \
+    jenv enable-plugin export && \
+    jenv add /usr/lib/jvm/java-11-openjdk-amd64 && \
+    jenv add /usr/lib/jvm/java-8-openjdk-amd64 && \
+    jenv global 11.0
+
+
 # ENTRYPOINT
 # ==========
 

@@ -171,6 +171,7 @@ RUN sudo apt update && \
 RUN curl -s "https://get.sdkman.io" | bash
 ENV BASH_ENV /home/dev/.sdkman/bin/sdkman-init.sh
 RUN sdk install maven
+RUN sdk install gradle
 RUN sdk install kotlin
 RUN sdk install kscript
 

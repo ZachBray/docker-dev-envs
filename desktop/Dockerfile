@@ -262,6 +262,8 @@ RUN eval "$(jenv init -)" && \
     jenv add /usr/lib/jvm/java-11-openjdk-amd64 && \
     jenv add /usr/lib/jvm/java-8-openjdk-amd64 && \
     jenv global 11.0
+# add shared object file for perfasm profiling
+ADD hsdis-amd64.so $HOME/.jenv/versions/openjdk64-11.0/lib/hsdis-amd64.so
 
 
 # ENTRYPOINT

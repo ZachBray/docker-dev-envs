@@ -85,6 +85,15 @@ RUN sudo ./add_plugin.sh $INTELLIJ_HOME 51536
 # rust
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 53557
 
+# markdown
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 52409
+
+# proselint
+RUN sudo apt update && sudo apt install -y python-pip
+RUN pip install --user proselint
+ENV PATH=$HOME/.local/bin:$PATH
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 41353
+
 # CONFIGURATION
 # =============
 ADD fix_keymap.sh /home/dev/fix_keymap.sh

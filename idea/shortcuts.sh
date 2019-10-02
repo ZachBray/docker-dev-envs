@@ -8,7 +8,3 @@ function rider() {
   eval bash /$RIDER_HOME/bin/rider.sh $1 >> /dev/null &
 }
 
-function webstorm() {
-  eval bash /$WEBSTORM_HOME/bin/webstorm.sh $1 >> /dev/null &
-}
-

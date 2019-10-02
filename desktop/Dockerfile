@@ -68,6 +68,18 @@ USER dev
 ENV HOME /home/dev
 WORKDIR /home/dev
 
+# TOOLS
+# =====
+
+RUN sudo apt update && sudo apt install -y graphviz
+RUN sudo apt update && sudo apt install -y tree
+RUN sudo apt update && sudo apt install -y net-tools
+RUN sudo apt update && sudo apt install -y iputils-ping
+RUN sudo apt update && sudo apt install -y lsof
+RUN sudo apt update && sudo apt install -y strace
+RUN sudo apt update && sudo apt install -y linux-tools-`uname -r` linux-tools-generic linux-cloud-tools-generic
+RUN sudo apt update && sudo apt install -y jq
+RUN sudo apt update && sudo DEBIAN_FRONTEND=noninteractive apt install -y awscli
 
 # RUST
 # ====
@@ -144,10 +156,6 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
     sudo apt update && \
     sudo apt install -y yarn
 
-# install typescript and tslint globally
-RUN sudo yarn global add typescript \
-                         tslint
-
 
 # JAVA
 # ====
@@ -174,13 +182,6 @@ RUN sdk install maven
 RUN sdk install gradle
 RUN sdk install kotlin
 RUN sdk install kscript
-
-# install async-profiler
-RUN wget https://github.com/jvm-profiling-tools/async-profiler/releases/download/v1.5/async-profiler-1.5-linux-x64.tar.gz -O /tmp/async-profiler.tar.gz
-RUN sudo mkdir -p /tools
-RUN sudo chown dev /tools
-RUN tar -xvzf /tmp/async-profiler.tar.gz -C /tools
-RUN rm /tmp/async-profiler.tar.gz
 
 # SHELL
 # =====
@@ -219,25 +220,30 @@ RUN sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure wireshark-common
 RUN sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
 RUN sudo chmod +x /usr/bin/dumpcap
 
-# TOOLS
-# =====
+# DOCKER
+# ======
 
-RUN sudo apt update && sudo apt install -y graphviz
-RUN sudo apt update && sudo apt install -y tree
-RUN sudo apt update && sudo apt install -y net-tools
-RUN sudo apt update && sudo apt install -y lsof
-RUN sudo apt update && sudo apt install -y strace
-RUN sudo apt update && sudo apt install -y linux-tools-`uname -r` linux-tools-generic
-RUN sudo apt update && sudo apt install -y jq
-RUN sudo apt update && sudo DEBIAN_FRONTEND=noninteractive apt install -y awscli
-RUN sudo apt update && sudo apt install -y docker docker-compose
+RUN sudo apt update && sudo apt install -y apt-transport-https \
+                                           ca-certificates \
+                                           curl \
+                                           gnupg-agent \
+                                           software-properties-common
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+RUN sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+RUN sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io
 RUN sudo groupmod -g 999 docker
 RUN sudo usermod -a -G docker dev
+
+RUN sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+RUN sudo chmod +x /usr/local/bin/docker-compose
 
 # TERRAFORM
 # =========
 
-ENV TERRAFORM_VERSION=0.11.11
+ENV TERRAFORM_VERSION=0.12.9
 RUN wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -O /tmp/terraform.zip
 RUN sudo unzip /tmp/terraform.zip -d /usr/local/bin
 
@@ -262,6 +268,15 @@ RUN eval "$(jenv init -)" && \
     jenv add /usr/lib/jvm/java-11-openjdk-amd64 && \
     jenv add /usr/lib/jvm/java-8-openjdk-amd64 && \
     jenv global 11.0
+
+# PROFILING
+# =========
+# install async-profiler
+RUN wget https://github.com/jvm-profiling-tools/async-profiler/releases/download/v1.5/async-profiler-1.5-linux-x64.tar.gz -O /tmp/async-profiler.tar.gz
+RUN sudo mkdir -p /tools
+RUN sudo chown dev /tools
+RUN tar -xvzf /tmp/async-profiler.tar.gz -C /tools
+RUN rm /tmp/async-profiler.tar.gz
 # add shared object file for perfasm profiling
 ADD hsdis-amd64.so $HOME/.jenv/versions/11.0/lib/hsdis-amd64.so
 
@@ -270,4 +285,3 @@ ADD hsdis-amd64.so $HOME/.jenv/versions/11.0/lib/hsdis-amd64.so
 # ==========
 
 ENTRYPOINT tmux
-

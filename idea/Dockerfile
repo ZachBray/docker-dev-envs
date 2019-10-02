@@ -6,22 +6,10 @@ FROM env/desktop
 ADD fix_vm_options.sh /home/dev/fix_vm_options.sh
 
 
-# WEB STORM
-# =========
-
-ENV WEBSTORM_VERSION WebStorm-2018.3.2
-ENV WEBSTORM_HOME "/$WEBSTORM_VERSION"
-RUN wget -O webstorm.tar.gz https://download.jetbrains.com/webstorm/$WEBSTORM_VERSION.tar.gz
-RUN sudo mkdir -p $WEBSTORM_HOME
-RUN sudo tar -C $WEBSTORM_HOME -xzf webstorm.tar.gz --strip 1
-RUN rm webstorm.tar.gz
-RUN sudo bash fix_vm_options.sh $WEBSTORM_HOME/bin/webstorm64.vmoptions
-
-
 # RIDER
 # =====
 
-ENV RIDER_VERSION Rider-2018.3
+ENV RIDER_VERSION Rider-2019.2
 ENV RIDER_HOME "/$RIDER_VERSION"
 RUN wget -O rider.tar.gz https://download.jetbrains.com/rider/JetBrains.$RIDER_VERSION.tar.gz
 RUN sudo mkdir -p $RIDER_HOME
@@ -30,11 +18,11 @@ RUN rm rider.tar.gz
 RUN sudo bash fix_vm_options.sh $RIDER_HOME/bin/rider64.vmoptions
 
 
-# INTELLIJ
+# ULTIMATE
 # ========
 
-ENV INTELLIJ_VERSION ideaIC-2018.3.2
-ENV INTELLIJ_HOME /idea-IC-183.4886.37
+ENV INTELLIJ_VERSION ideaIU-2019.2.3
+ENV INTELLIJ_HOME /idea-IU-192.6817.14
 RUN wget -O intellij.tar.gz https://download.jetbrains.com/idea/$INTELLIJ_VERSION.tar.gz
 RUN sudo tar -C / -xzf intellij.tar.gz
 RUN rm intellij.tar.gz
@@ -49,44 +37,57 @@ ADD add_plugin.sh /home/dev/add_plugin.sh
 # editor config
 RUN sudo ./add_plugin.sh $RIDER_HOME 46642
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 46642
-RUN sudo ./add_plugin.sh $WEBSTORM_HOME 46642
 
 # ideavim
-RUN sudo ./add_plugin.sh $RIDER_HOME 51219
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 51219
-RUN sudo ./add_plugin.sh $WEBSTORM_HOME 51219
+RUN sudo ./add_plugin.sh $RIDER_HOME 66784
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 66784
 ADD .ideavimrc $HOME
 RUN sudo chown dev:dev $HOME/.ideavimrc
 
 # save actions
-RUN sudo ./add_plugin.sh $RIDER_HOME 48395 JAR saveActions
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 48395 JAR saveActions
-RUN sudo ./add_plugin.sh $WEBSTORM_HOME 48395 JAR saveActions
+RUN sudo ./add_plugin.sh $RIDER_HOME 69223 JAR saveActions
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 69223 JAR saveActions
 
 # plantuml
-RUN sudo ./add_plugin.sh $RIDER_HOME 50970
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 50970
-RUN sudo ./add_plugin.sh $WEBSTORM_HOME 50970
+RUN sudo ./add_plugin.sh $RIDER_HOME 68902
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 68902
 
 # key promoter
-RUN sudo ./add_plugin.sh $RIDER_HOME 47761
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 47761
-RUN sudo ./add_plugin.sh $WEBSTORM_HOME 47761
+RUN sudo ./add_plugin.sh $RIDER_HOME 68138
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 68138
 
 # lombok
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 47623
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 67665
 
-# checkstyle
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 48315
+# qaplug
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 60412
 
-# kotlin
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 51536
+# qaplug-checkstyle
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 45265
+
+# qaplug-findbugs
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 45264
+
+# qaplug-pmd
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 47797
+
+# this should be bundled
+# --- kotlin
+# --- RUN sudo ./add_plugin.sh $INTELLIJ_HOME 67659
+
+# toml
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 63629
 
 # rust
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 53557
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 69227
 
-# markdown
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 52409
+# BROWSERS
+# ========
+
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN sudo apt update && sudo apt install -y libappindicator3-1 xdg-utils
+RUN sudo dpkg -i google-chrome-stable_current_amd64.deb
+RUN rm google-chrome-stable_current_amd64.deb
 
 # proselint
 RUN sudo apt update && sudo apt install -y python-pip
@@ -100,13 +101,11 @@ ADD fix_keymap.sh /home/dev/fix_keymap.sh
 ADD \$default.xml /home/dev/\$default.xml
 RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $RIDER_HOME"
 RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $INTELLIJ_HOME"
-RUN sudo bash -c "source /home/dev/.bashrc; ./fix_keymap.sh $WEBSTORM_HOME"
 
 # SHORTCUTS
 # =========
 ADD shortcuts.sh /home/dev/shortcuts.sh
 RUN echo "source /home/dev/shortcuts.sh" >> ~/.zshrc
-
 
 # SRC VOLUME
 # ==========

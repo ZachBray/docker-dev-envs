@@ -28,6 +28,13 @@ RUN sudo tar -C / -xzf intellij.tar.gz
 RUN rm intellij.tar.gz
 RUN sudo bash fix_vm_options.sh $INTELLIJ_HOME/bin/idea64.vmoptions
 
+# BROWSERS
+# ========
+
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN sudo apt update && sudo apt install -y libappindicator3-1 xdg-utils
+RUN sudo dpkg -i google-chrome-stable_current_amd64.deb
+RUN rm google-chrome-stable_current_amd64.deb
 
 # PLUGINS
 # =======
@@ -45,8 +52,8 @@ ADD .ideavimrc $HOME
 RUN sudo chown dev:dev $HOME/.ideavimrc
 
 # save actions
-RUN sudo ./add_plugin.sh $RIDER_HOME 69223 JAR saveActions
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 69223 JAR saveActions
+RUN sudo ./add_plugin.sh $RIDER_HOME 61033 JAR saveActions
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 61033 JAR saveActions
 
 # plantuml
 RUN sudo ./add_plugin.sh $RIDER_HOME 68902
@@ -71,29 +78,11 @@ RUN sudo ./add_plugin.sh $INTELLIJ_HOME 45264
 # qaplug-pmd
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 47797
 
-# this should be bundled
-# --- kotlin
-# --- RUN sudo ./add_plugin.sh $INTELLIJ_HOME 67659
-
 # toml
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 63629
 
 # rust
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 69227
-
-# BROWSERS
-# ========
-
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN sudo apt update && sudo apt install -y libappindicator3-1 xdg-utils
-RUN sudo dpkg -i google-chrome-stable_current_amd64.deb
-RUN rm google-chrome-stable_current_amd64.deb
-
-# proselint
-RUN sudo apt update && sudo apt install -y python-pip
-RUN pip install --user proselint
-ENV PATH=$HOME/.local/bin:$PATH
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 41353
 
 # CONFIGURATION
 # =============

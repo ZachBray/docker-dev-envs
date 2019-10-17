@@ -46,8 +46,8 @@ RUN sudo ./add_plugin.sh $RIDER_HOME 46642
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 46642
 
 # ideavim
-RUN sudo ./add_plugin.sh $RIDER_HOME 66784
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 66784
+RUN sudo ./add_plugin.sh $RIDER_HOME 68881
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 68881
 ADD .ideavimrc $HOME
 RUN sudo chown dev:dev $HOME/.ideavimrc
 
@@ -67,16 +67,16 @@ RUN sudo ./add_plugin.sh $INTELLIJ_HOME 68138
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 67665
 
 # qaplug
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 60412
+# RUN sudo ./add_plugin.sh $INTELLIJ_HOME 60412
 
 # qaplug-checkstyle
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 45265
+# RUN sudo ./add_plugin.sh $INTELLIJ_HOME 45265
 
 # qaplug-findbugs
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 45264
+# RUN sudo ./add_plugin.sh $INTELLIJ_HOME 45264
 
 # qaplug-pmd
-RUN sudo ./add_plugin.sh $INTELLIJ_HOME 47797
+# RUN sudo ./add_plugin.sh $INTELLIJ_HOME 47797
 
 # toml
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 63629

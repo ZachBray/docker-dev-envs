@@ -23,7 +23,7 @@ RUN sudo bash fix_vm_options.sh $RIDER_HOME/bin/rider64.vmoptions
 
 ENV INTELLIJ_VERSION ideaIU-2019.2.3
 ENV INTELLIJ_HOME /idea-IU-192.6817.14
-RUN wget -O intellij.tar.gz https://download.jetbrains.com/idea/$INTELLIJ_VERSION.tar.gz
+RUN wget -O intellij.tar.gz https://download.jetbrains.com/idea/$INTELLIJ_VERSION-jbr8.tar.gz
 RUN sudo tar -C / -xzf intellij.tar.gz
 RUN rm intellij.tar.gz
 RUN sudo bash fix_vm_options.sh $INTELLIJ_HOME/bin/idea64.vmoptions
@@ -83,6 +83,9 @@ RUN sudo ./add_plugin.sh $INTELLIJ_HOME 63629
 
 # rust
 RUN sudo ./add_plugin.sh $INTELLIJ_HOME 69227
+
+# antlr
+RUN sudo ./add_plugin.sh $INTELLIJ_HOME 64387
 
 # CONFIGURATION
 # =============
